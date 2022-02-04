@@ -13,9 +13,9 @@
       <div class="card">
         <div class="card-body">
           <h5 class="titulo">
-            Agregar tarjeta de credito
+            {{ accion | uppercase }} tarjeta de credito
           </h5>
-          <form [formGroup]="form" (ngSubmit)="addCard()">
+          <form [formGroup]="form" (ngSubmit)="saveCard()">
             <div class="input-group input-group-lg mb-3">
               <span class="input-group-text">
                 <i class="far fa-user" [class.green-icon]="this.form.get('headline')?.valid"
@@ -73,13 +73,13 @@
           </h5>
           <table class="table">
             <tbody>
-              <tr *ngFor="let tarjeta of listCard; let i = index">
-                <td>{{tarjeta.headline}}</td>
-                <td>{{tarjeta.numberCard}}</td>
-                <td>{{tarjeta.expirationDate}}</td>
-                <td><i class="far fa-edit text-info"></i></td>
+              <tr *ngFor="let card of listCard">
+                <td>{{card.headline}}</td>
+                <td>{{card.numberCard}}</td>
+                <td>{{card.expirationDate}}</td>
+                <td><i (click)="editCard(card)" class="far fa-edit text-info"></i></td>
                 <td>
-                  <i (click)="eliminarTarjeta(i)" class="far fa-trash-alt text-danger"></i>
+                  <i (click)="deleteCard(card.id)" class="far fa-trash-alt text-danger"></i>
                 </td>
               </tr>
             </tbody>
